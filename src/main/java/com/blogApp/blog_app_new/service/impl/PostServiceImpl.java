@@ -34,7 +34,7 @@ public class PostServiceImpl implements PostService {
 
     @Override
     public PostDto findPostById(Long id) {
-        Post fetchedPost = postRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException(String.format("POST WITH ID %d NOT FOUND")));
+        Post fetchedPost = postRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException(String.format("POST WITH ID %d NOT FOUND",id)));
         return entityToDto.postEntityToDTO(fetchedPost);
     }
 }
