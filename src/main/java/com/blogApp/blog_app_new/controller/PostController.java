@@ -3,7 +3,6 @@ package com.blogApp.blog_app_new.controller;
 import com.blogApp.blog_app_new.dto.PostDto;
 import com.blogApp.blog_app_new.service.PostService;
 import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
