@@ -47,4 +47,12 @@ public class PostServiceImpl implements PostService {
         Post savedPost = postRepository.save(fetchedPost);
         return entityToDto.postEntityToDTO(savedPost);
     }
+
+    @Override
+    public void deletePostById(Long id) {
+
+        postRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException(String.format("POST with ID %s :: NOT FOUND", id)));
+        postRepository.deleteById(id);
+        //return null;
+    }
 }
