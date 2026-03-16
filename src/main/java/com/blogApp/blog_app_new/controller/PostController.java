@@ -21,6 +21,12 @@ public class PostController {
     @GetMapping("/getPost")
     public ResponseEntity<PostDto> getPost(@RequestParam Long id) {
         PostDto fetchedPost = postService.findPostById(id);
-        return new ResponseEntity<>(fetchedPost,HttpStatus.FOUND);
+        return new ResponseEntity<>(fetchedPost, HttpStatus.FOUND);
+    }
+
+    @PutMapping("/updatePost/{id}")
+    public ResponseEntity<PostDto> updatePost(@RequestBody PostDto postDto, @PathVariable(name = "id") Long id) {
+        PostDto updatedPost = postService.updatePostById(postDto, id);
+        return new ResponseEntity<>(updatedPost, HttpStatus.OK);
     }
 }

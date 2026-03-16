@@ -1,5 +1,7 @@
 package com.blogApp.blog_app_new.exception;
 
+import lombok.Data;
+
 import java.util.List;
 
 @Data
