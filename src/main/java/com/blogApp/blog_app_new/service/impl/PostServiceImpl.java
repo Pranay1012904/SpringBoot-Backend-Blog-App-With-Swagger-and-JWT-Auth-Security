@@ -11,6 +11,7 @@ import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
 import java.util.Optional;
 
 @Slf4j
@@ -46,6 +47,12 @@ public class PostServiceImpl implements PostService {
         fetchedPost.setDescription(postDto.getDescription());
         Post savedPost = postRepository.save(fetchedPost);
         return entityToDto.postEntityToDTO(savedPost);
+    }
+
+    @Override
+    public List<PostDto> getAllPosts() {
+        List<Post> allPosts = postRepository.findAll();
+        return allPosts.stream().map(p -> entityToDto.postEntityToDTO(p)).toList();
     }
 
     @Override
