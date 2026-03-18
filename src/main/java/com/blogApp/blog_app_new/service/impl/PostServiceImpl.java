@@ -9,6 +9,9 @@ import com.blogApp.blog_app_new.repository.PostRepository;
 import com.blogApp.blog_app_new.service.PostService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -50,8 +53,12 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
-    public List<PostDto> getAllPosts() {
-        List<Post> allPosts = postRepository.findAll();
+    public List<PostDto> getAllPosts(int pageNo, int pageSize) {
+        //----CREATE PAGEABLE INSTANCE
+        Pageable pageable = PageRequest.of(pageNo, pageSize);
+        Page<Post> fetchedPosts = postRepository.findAll(pageable);
+        //-----get List of Posts for Page Object
+        List<Post> allPosts = fetchedPosts.getContent();
         return allPosts.stream().map(p -> entityToDto.postEntityToDTO(p)).toList();
     }
 

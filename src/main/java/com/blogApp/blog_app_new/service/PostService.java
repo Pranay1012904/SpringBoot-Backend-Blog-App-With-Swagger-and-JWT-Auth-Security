@@ -13,7 +13,7 @@ public interface PostService {
 
     PostDto updatePostById(PostDto postDto, Long id);
 
-    List<PostDto> getAllPosts();
+    List<PostDto> getAllPosts(int pageNo, int pageSize);
 
-     void deletePostById(Long id);
+    void deletePostById(Long id);
 }
