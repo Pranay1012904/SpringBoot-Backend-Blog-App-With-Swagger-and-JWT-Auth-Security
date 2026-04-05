@@ -1,6 +1,7 @@
 package com.blogApp.blog_app_new.service.impl;
 
 import com.blogApp.blog_app_new.dto.PostDto;
+import com.blogApp.blog_app_new.dto.PostResponse;
 import com.blogApp.blog_app_new.entity.Post;
 import com.blogApp.blog_app_new.exception.ResourceNotFoundException;
 import com.blogApp.blog_app_new.mapper.postMapper.DtoToEntity;
@@ -53,13 +54,21 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
-    public List<PostDto> getAllPosts(int pageNo, int pageSize) {
+    public PostResponse getAllPosts(int pageNo, int pageSize) {
         //----CREATE PAGEABLE INSTANCE
         Pageable pageable = PageRequest.of(pageNo, pageSize);
         Page<Post> fetchedPosts = postRepository.findAll(pageable);
         //-----get List of Posts for Page Object
         List<Post> allPosts = fetchedPosts.getContent();
-        return allPosts.stream().map(p -> entityToDto.postEntityToDTO(p)).toList();
+        PostResponse postResponse=new PostResponse(
+                allPosts.stream().map(p -> entityToDto.postEntityToDTO(p)).toList(),
+                fetchedPosts.getNumber(),
+                fetchedPosts.getSize(),
+                fetchedPosts.getTotalElements(),
+                fetchedPosts.getTotalPages(),
+                fetchedPosts.isLast()
+        );
+        return postResponse;
     }
 
     @Override

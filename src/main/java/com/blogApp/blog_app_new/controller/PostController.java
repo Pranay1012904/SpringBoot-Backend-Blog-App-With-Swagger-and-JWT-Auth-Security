@@ -1,7 +1,9 @@
 package com.blogApp.blog_app_new.controller;
 
 import com.blogApp.blog_app_new.dto.PostDto;
+import com.blogApp.blog_app_new.dto.PostResponse;
 import com.blogApp.blog_app_new.service.PostService;
+import com.blogApp.blog_app_new.utility.ConstantCodes;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,11 +25,11 @@ public class PostController {
     }
 
     @GetMapping("/getAllPosts")
-    public ResponseEntity<List<PostDto>> getAllPosts(
-            @RequestParam(value = "pageNo", defaultValue = "0", required = false) int pageNo,
-            @RequestParam(value = "pageSize", defaultValue = "5", required = false) int pageSize
+    public ResponseEntity<PostResponse> getAllPosts(
+            @RequestParam(value = ConstantCodes.PAGE_NO, defaultValue = ConstantCodes.PAGE_NO_DEFAULT, required = false) int pageNo,
+            @RequestParam(value = ConstantCodes.PAGE_SIZE, defaultValue = ConstantCodes.PAGE_SIZE_DEFAULT, required = false) int pageSize
     ) {
-        List<PostDto> fetchedPosts = postService.getAllPosts(pageNo, pageSize);
+        PostResponse fetchedPosts = postService.getAllPosts(pageNo, pageSize);
         return new ResponseEntity<>(fetchedPosts, HttpStatus.FOUND);
     }
 
