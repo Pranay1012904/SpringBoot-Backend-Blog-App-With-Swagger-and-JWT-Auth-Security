@@ -1,6 +1,7 @@
 package com.blogApp.blog_app_new.service;
 
 import com.blogApp.blog_app_new.dto.PostDto;
+import com.blogApp.blog_app_new.dto.PostResponse;
 import com.blogApp.blog_app_new.entity.Post;
 
 import java.util.List;
@@ -13,7 +14,7 @@ public interface PostService {
 
     PostDto updatePostById(PostDto postDto, Long id);
 
-    List<PostDto> getAllPosts(int pageNo, int pageSize);
+    PostResponse getAllPosts(int pageNo, int pageSize);
 
     void deletePostById(Long id);
 }
